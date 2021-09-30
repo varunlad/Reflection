@@ -66,13 +66,5 @@ namespace ReflectionDemo
                 throw new CustomMoodAnalyzerException(CustomMoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND, "class not found");
             }
         }
-                
-            
-            //catch(Exception ex)
-            //{
-            //    throw new Exception(ex.Message);
-            //}
-        
-
     }
 }
