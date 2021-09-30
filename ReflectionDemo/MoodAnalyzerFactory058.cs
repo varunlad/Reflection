@@ -47,30 +47,32 @@ namespace ReflectionDemo
         }
         public object CreateMoodAnalyzerParametarizedObject(string className, string constructor, string message)
         {
-            try
+
+            Type type = typeof(MoodAnalyzer);
+            if (type.Name.Equals(className) || type.FullName.Equals(className))
             {
-                Type type = typeof(MoodAnalyzer);
-                if(type.Name.Equals(className) || type.FullName.Equals(className))
+                if (type.Name.Equals(constructor))
                 {
-                    if (type.Name.Equals(constructor))
-                    {
-                        ConstructorInfo constructorInfo = type.GetConstructor(new[] { typeof(string) });
-                        var obj = constructorInfo.Invoke(new object[] { message });
-                        return obj;
-                    }
-                    else
-                        throw new CustomMoodAnalyzerException(CustomMoodAnalyzerException.ExceptionType.CONSTRUCTOR_NOT_FOUND, "constructor not found");
+                    ConstructorInfo constructorInfo = type.GetConstructor(new[] { typeof(string) });
+                    var obj = constructorInfo.Invoke(new object[] { message });
+                    return obj;
                 }
                 else
-                {
-                    throw new CustomMoodAnalyzerException(CustomMoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND, "class not found");
-                }
+                    throw new CustomMoodAnalyzerException(CustomMoodAnalyzerException.ExceptionType.CONSTRUCTOR_NOT_FOUND, "constructor not found");
             }
-            catch(Exception ex)
+            else
             {
-                throw new Exception(ex.Message);
+
+                throw new CustomMoodAnalyzerException(CustomMoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND, "class not found");
             }
         }
+                
+            
+            //catch(Exception ex)
+            //{
+            //    throw new Exception(ex.Message);
+            //}
+        
 
     }
 }

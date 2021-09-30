@@ -112,6 +112,10 @@ namespace UnitTestProject1
             }
 
         }
+        /// <summary>
+        ///  UC-5   Givens the mood analyzer using reflection return parametarized constructor.
+        /// </summary>
+        /// <exception cref="System.Exception"></exception>
         [TestMethod]
         [TestCategory("Reflection")]
         public void Given_MoodAnalyzer_Using_Reflection_Return_ParametarizedConstructor()
@@ -130,8 +134,52 @@ namespace UnitTestProject1
                 //ASSERT
                 throw new Exception(execption.Message);
             }
-            actual.Equals(excepted);
+            
 
         }
+        [TestMethod]
+        [TestCategory("Reflection")]
+        public void Given_MoodAnalyzer_Using_Reflection_Return_classException_ParametarizedConstructor()
+        {
+            string excepted = "class not found";
+            string message = "i am in a happy mood";
+            object actual = null;
+            try
+            {
+                //ACT
+                MoodAnalyzerFactory058 factory = new MoodAnalyzerFactory058();
+                actual = factory.CreateMoodAnalyzerParametarizedObject("EmpWage", "EmpWage", message);
+            }
+            catch (CustomMoodAnalyzerException execption)
+            {
+                //ASSERT
+                Assert.AreEqual(excepted, execption.Message);
+            }  
+            
+
+        }
+        [TestMethod]
+        [TestCategory("Reflection")]
+        public void Given_MoodAnalyzer_Using_Reflection_Return_Constructor_Exception_ParametarizedConstructor()
+        {
+            string excepted = "constructor not found";
+            string message = "I am in a happy mood";
+            object actual = null;
+            try
+            {
+                //ACT
+                MoodAnalyzerFactory058 factory = new MoodAnalyzerFactory058();
+                actual = factory.CreateMoodAnalyzerParametarizedObject("MoodAnalyzer", "Empwage", message);
+            }
+            catch (CustomMoodAnalyzerException execption)
+            {
+                //ASSERT
+                Assert.AreEqual(excepted, execption.Message);
+            }
+            
+
+
+        }
+
     }
 }
