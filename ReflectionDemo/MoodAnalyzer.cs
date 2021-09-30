@@ -18,7 +18,7 @@ namespace ReflectionDemo
         {
             Console.WriteLine("Default Constructor");
         }
-
+        
         public string AnalyzeMood()
         {
             try

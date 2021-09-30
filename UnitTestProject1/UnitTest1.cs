@@ -72,6 +72,7 @@ namespace UnitTestProject1
                 throw new Exception(execption.Message);
             }
             obj.Equals(excepted);
+
         }
         [TestMethod]
         [TestCategory("Reflection")]
@@ -109,6 +110,27 @@ namespace UnitTestProject1
                 //ASSERT
                 Assert.AreEqual(excepted, execption.Message);
             }
+
+        }
+        [TestMethod]
+        [TestCategory("Reflection")]
+        public void Given_MoodAnalyzer_Using_Reflection_Return_ParametarizedConstructor()
+        {
+            string message = "i am in a happy mood";
+            MoodAnalyzer excepted = new MoodAnalyzer(message);
+            object actual = null;
+            try
+            {
+                //ACT
+                MoodAnalyzerFactory058 factory = new MoodAnalyzerFactory058();
+               actual = factory.CreateMoodAnalyzerParametarizedObject("MoodAnalyzer", "MoodAnalyzer",message);
+            }
+            catch (CustomMoodAnalyzerException execption)
+            {
+                //ASSERT
+                throw new Exception(execption.Message);
+            }
+            actual.Equals(excepted);
 
         }
     }

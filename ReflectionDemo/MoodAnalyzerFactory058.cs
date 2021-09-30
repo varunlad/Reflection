@@ -8,8 +8,19 @@ using System.Threading.Tasks;
 
 namespace ReflectionDemo
 {
-    class MoodAnalyzerFactory058
+   public class MoodAnalyzerFactory058
     {
+        /// <summary>
+        /// Creats the mood analyzer object.
+        /// </summary>
+        /// <param name="className">Name of the class.</param>
+        /// <param name="constructor">The constructor.</param>
+        /// <returns></returns>
+        /// <exception cref="ReflectionDemo.CustomMoodAnalyzerException">
+        /// class not found
+        /// or
+        /// constructor not found
+        /// </exception>
         public object CreatMoodAnalyzerObject(string className, string constructor)
         {
             string pattern = "." + constructor + "$";
@@ -24,7 +35,7 @@ namespace ReflectionDemo
                     var res = Activator.CreateInstance(moodAnalyzerType);
                     return res;
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
                     throw new CustomMoodAnalyzerException(CustomMoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND, "class not found");
                 }
@@ -34,5 +45,32 @@ namespace ReflectionDemo
                 throw new CustomMoodAnalyzerException(CustomMoodAnalyzerException.ExceptionType.CONSTRUCTOR_NOT_FOUND, "constructor not found");
             }
         }
+        public object CreateMoodAnalyzerParametarizedObject(string className, string constructor, string message)
+        {
+            try
+            {
+                Type type = typeof(MoodAnalyzer);
+                if(type.Name.Equals(className) || type.FullName.Equals(className))
+                {
+                    if (type.Name.Equals(constructor))
+                    {
+                        ConstructorInfo constructorInfo = type.GetConstructor(new[] { typeof(string) });
+                        var obj = constructorInfo.Invoke(new object[] { message });
+                        return obj;
+                    }
+                    else
+                        throw new CustomMoodAnalyzerException(CustomMoodAnalyzerException.ExceptionType.CONSTRUCTOR_NOT_FOUND, "constructor not found");
+                }
+                else
+                {
+                    throw new CustomMoodAnalyzerException(CustomMoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND, "class not found");
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }
