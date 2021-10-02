@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ReflectionDemo
 {
-   public class MoodAnalyzerFactory058
+    public class MoodAnalyzerFactory058
     {
         /// <summary>
         /// Creats the mood analyzer object.
@@ -35,7 +35,7 @@ namespace ReflectionDemo
                     var res = Activator.CreateInstance(moodAnalyzerType);
                     return res;
                 }
-                catch (Exception )
+                catch (Exception)
                 {
                     throw new CustomMoodAnalyzerException(CustomMoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND, "class not found");
                 }
@@ -45,26 +45,50 @@ namespace ReflectionDemo
                 throw new CustomMoodAnalyzerException(CustomMoodAnalyzerException.ExceptionType.CONSTRUCTOR_NOT_FOUND, "constructor not found");
             }
         }
+        /// <summary>
+        /// Creates the mood analyzer parametarized object.
+        /// </summary>
+        /// <param name="className">Name of the class.</param>
+        /// <param name="constructor">The constructor.</param>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
+        /// <exception cref="ReflectionDemo.CustomMoodAnalyzerException">
+        /// constructor not found
+        /// or
+        /// class not found
+        /// </exception>
+        /// <exception cref="System.Exception"></exception>
         public object CreateMoodAnalyzerParametarizedObject(string className, string constructor, string message)
         {
-
-            Type type = typeof(MoodAnalyzer);
-            if (type.Name.Equals(className) || type.FullName.Equals(className))
+            try
             {
-                if (type.Name.Equals(constructor))
+                Type type = typeof(MoodAnalyzer);
+                if (type.Name.Equals(className) || type.FullName.Equals(className))
                 {
-                    ConstructorInfo constructorInfo = type.GetConstructor(new[] { typeof(string) });
-                    var obj = constructorInfo.Invoke(new object[] { message });
-                    return obj;
+                    if (type.Name.Equals(constructor))
+                    {
+                        ConstructorInfo constructorInfo = type.GetConstructor(new[] { typeof(string) });
+                        var obj = constructorInfo.Invoke(new object[] { message });
+                        return obj;
+                    }
+                    else
+                        throw new CustomMoodAnalyzerException(CustomMoodAnalyzerException.ExceptionType.CONSTRUCTOR_NOT_FOUND, "constructor not found");
                 }
                 else
-                    throw new CustomMoodAnalyzerException(CustomMoodAnalyzerException.ExceptionType.CONSTRUCTOR_NOT_FOUND, "constructor not found");
+                {
+                    throw new CustomMoodAnalyzerException(CustomMoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND, "class not found");
+                }
             }
-            else
+            catch(CustomMoodAnalyzerException ex)
             {
-
-                throw new CustomMoodAnalyzerException(CustomMoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND, "class not found");
+                throw new CustomMoodAnalyzerException(CustomMoodAnalyzerException.ExceptionType.CONSTRUCTOR_NOT_FOUND, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
+       
     }
 }
+    

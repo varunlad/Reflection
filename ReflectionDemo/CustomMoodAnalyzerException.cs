@@ -14,7 +14,10 @@ namespace ReflectionDemo
             EMPTY_TYPE_EXCEPTION,
             INVALID_MOOD_EXCEPTION,
             CLASS_NOT_FOUND,
-            CONSTRUCTOR_NOT_FOUND
+            CONSTRUCTOR_NOT_FOUND,
+            NO_SUCH_METHOD,
+            NULL_MESSAGE,
+            FIELD_NULL
         }
         public CustomMoodAnalyzerException(ExceptionType type, string massage) : base(massage)
         {

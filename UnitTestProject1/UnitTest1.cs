@@ -63,7 +63,7 @@ namespace UnitTestProject1
             try
             {
                 //ACT
-                MoodAnalyzerFactory factory = new MoodAnalyzerFactory();
+                MoodAnalyzerFactory058 factory = new MoodAnalyzerFactory058();
                 obj = factory.CreatMoodAnalyzerObject("ReflectionDemo.MoodAnalyzer", "MoodAnalyzer");
             }
             catch (CustomMoodAnalyzerException execption)
@@ -83,7 +83,7 @@ namespace UnitTestProject1
             try
             {
                 //ACT
-                MoodAnalyzerFactory factory = new MoodAnalyzerFactory();
+                MoodAnalyzerFactory058 factory = new MoodAnalyzerFactory058();
                 obj = factory.CreatMoodAnalyzerObject("Exception058.MoodAnalyzer", "MoodAnal");
             }
             catch (CustomMoodAnalyzerException execption)
@@ -102,7 +102,7 @@ namespace UnitTestProject1
             try
             {
                 //ACT
-                MoodAnalyzerFactory factory = new MoodAnalyzerFactory();
+                MoodAnalyzerFactory058 factory = new MoodAnalyzerFactory058();
                 obj = factory.CreatMoodAnalyzerObject("Exception058.EmployeeWage", "EmployeeWage");
             }
             catch (CustomMoodAnalyzerException execption)
@@ -127,14 +127,14 @@ namespace UnitTestProject1
             {
                 //ACT
                 MoodAnalyzerFactory058 factory = new MoodAnalyzerFactory058();
-               actual = factory.CreateMoodAnalyzerParametarizedObject("MoodAnalyzer", "MoodAnalyzer",message);
+                actual = factory.CreateMoodAnalyzerParametarizedObject("MoodAnalyzer", "MoodAnalyzer", message);
             }
             catch (CustomMoodAnalyzerException execption)
             {
                 //ASSERT
                 throw new Exception(execption.Message);
             }
-            
+
 
         }
         [TestMethod]
@@ -154,8 +154,8 @@ namespace UnitTestProject1
             {
                 //ASSERT
                 Assert.AreEqual(excepted, execption.Message);
-            }  
-            
+            }
+
 
         }
         [TestMethod]
@@ -176,10 +176,11 @@ namespace UnitTestProject1
                 //ASSERT
                 Assert.AreEqual(excepted, execption.Message);
             }
-            
-
 
         }
 
+
+       
     }
 }
+

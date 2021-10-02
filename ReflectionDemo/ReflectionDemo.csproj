@@ -46,7 +46,6 @@
     <Compile Include="Clustomer.cs" />
     <Compile Include="CustomMoodAnalyzerException.cs" />
     <Compile Include="MoodAnalyzer.cs" />
-    <Compile Include="MoodAnalyzerFactory.cs" />
     <Compile Include="MoodAnalyzerFactory058.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
