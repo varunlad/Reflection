@@ -88,7 +88,30 @@ namespace ReflectionDemo
                 throw new Exception(ex.Message);
             }
         }
-       
+        /// <summary>
+        /// Invokes the analyzer method.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="methodName">Name of the method.</param>
+        /// <returns></returns>
+        /// <exception cref="ReflectionDemo.CustomMoodAnalyzerException">method not found</exception>
+        public string InvokeAnalyzerMethod(string message, string methodName)
+        {
+            try
+            {
+                Type type = typeof(MoodAnalyzer);
+                MethodInfo methodInfo = type.GetMethod(methodName);
+                MoodAnalyzerFactory058 factory058 = new MoodAnalyzerFactory058();
+                object moodAnalyzerObject = factory058.CreateMoodAnalyzerParametarizedObject("ReflectionDemo.MoodAnalyzer", "MoodAnalyzer", message);
+                object info = methodInfo.Invoke(moodAnalyzerObject, null);
+                return info.ToString();
+            }
+            catch (CustomMoodAnalyzerException ex)
+            {
+                throw new CustomMoodAnalyzerException(CustomMoodAnalyzerException.ExceptionType.NO_SUCH_METHOD, ex.Message);
+            }
+        }
+        
     }
 }
     

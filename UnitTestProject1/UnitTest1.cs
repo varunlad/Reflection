@@ -180,7 +180,50 @@ namespace UnitTestProject1
         }
 
 
+        [TestMethod]
+        [TestCategory("Reflection")]
+        public void Given_MoodAnalyzer_Using_Reflection_Return_Method()
+        {
+            string methodName = "AnalyzeMood";
+            string excepted = "happy";
+            string message = "I am in a happy mood";
+            object actual = "";
+            try
+            {
+                //ACT
+                MoodAnalyzerFactory058 factory = new MoodAnalyzerFactory058();
+                actual = factory.InvokeAnalyzerMethod( message,methodName);
+            }
+            catch (CustomMoodAnalyzerException execption)
+            {
+                //ASSERT
+                throw new Exception(execption.Message);
+            }
+            Assert.AreEqual(excepted, actual);
+        }
+        [TestMethod]
+        [TestCategory("Reflection")]
+        public void Given_MoodAnalyzer_Using_Reflection_Return_No_Such_Method()
+        {
+            string methodName = "EmployeeWage";
+            string excepted = "happy";
+            string message = "I am in a happy mood";
+            object actual = "";
+            try
+            {
+                //ACT
+                MoodAnalyzerFactory058 factory = new MoodAnalyzerFactory058();
+                actual = factory.InvokeAnalyzerMethod(message,methodName);
+            }
+            catch (CustomMoodAnalyzerException execption)
+            {
+                //ASSERT
+                throw new Exception(execption.Message);
+            }
+            Assert.AreEqual(excepted, actual);
+        }
        
+
     }
 }
 
