@@ -111,7 +111,42 @@ namespace ReflectionDemo
                 throw new CustomMoodAnalyzerException(CustomMoodAnalyzerException.ExceptionType.NO_SUCH_METHOD, ex.Message);
             }
         }
-        
+        /// <summary>
+        /// Sets the field.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="fieldName">Name of the field.</param>
+        /// <returns></returns>
+        /// <exception cref="ReflectionDemo.CustomMoodAnalyzerException">
+        /// message cannot be null
+        /// or
+        /// field should not be null
+        /// </exception>
+        /// <exception cref="System.Exception"></exception>
+        public string SetField(string message, string fieldName)
+        {
+            try
+            {
+                MoodAnalyzerFactory058 factory = new MoodAnalyzerFactory058();
+                MoodAnalyzer obj = (MoodAnalyzer)factory.CreatMoodAnalyzerObject("ReflectionDemo.MoodAnalyzer", "MoodAnalyzer");
+                Type type = typeof(MoodAnalyzer);
+                 FieldInfo field = type.GetField(fieldName, BindingFlags.Public | BindingFlags.Instance);
+                if (field != null)
+                {
+                    throw new CustomMoodAnalyzerException(CustomMoodAnalyzerException.ExceptionType.NULL_MESSAGE, "message cannot be null");
+                }
+                    field.SetValue(obj, message);
+                return obj.message;
+
+                throw new CustomMoodAnalyzerException(CustomMoodAnalyzerException.ExceptionType.FIELD_NULL, "field should not be null");
+            }
+                catch (Exception ex)
+                {
+                throw new Exception(ex.Message);
+                }
+
+        }
+
     }
 }
     
